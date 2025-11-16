@@ -1,2 +1,2 @@
-# understanding_GPT
+# Local_GPT
 Building GPT from Scratch using Pytorch
