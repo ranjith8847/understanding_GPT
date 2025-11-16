@@ -51,7 +51,25 @@ This project follows the architecture explained in Karpathy’s "nanoGPT" videos
 ---
 
 ## 🏗️ Model Architecture
+```
+Input indices (B, T)  --embed--> token_emb (B, T, n_embed)
+                       + pos_emb (1, T, n_embed)
+                               ↓
+                      Block  x n_layer (each has:)
+                      ┌────────────────────────────────────┐
+                      │ MultiHeadAttention  (B,T,n_embed)  │
+                      │ Add Residual + LayerNorm (post-norm)│
+                      │ FeedForward (B,T,n_embed)           │
+                      │ Add Residual + LayerNorm (post-norm)│
+                      └────────────────────────────────────┘
+                               ↓
+                final LayerNorm (B, T, n_embed)
+                               ↓
+                 Linear head → logits (B, T, V)
+                               ↓
+                   CrossEntropy loss (if targets)
 
+```
 ### 1. **Embedding Layer**
 - Token embeddings  
 - Positional embeddings  
